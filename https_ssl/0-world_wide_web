@@ -2,7 +2,7 @@
 # SSL project
 DOMAIN=$1
 SUB=$2
-subdomains=("www" "lb-01" "web-02" "web-01")
+subdomains=("www" "lb-01" "web-01" "web-02")
 
 display_info () {
 	if [ $# -gt 1 ]
