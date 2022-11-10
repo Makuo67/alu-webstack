@@ -1,0 +1,22 @@
+#!/bin/bash
+# SSL project
+DOMAIN=$1
+SUB=$2
+subdomains=("www" "lb-01" "web-02" "web-01")
+
+display_info () {
+	if [ $# -gt 1 ]
+		then
+			first_arg=$(dig $SUB.$DOMAIN | grep -A1 'ANSWER SECTION:' | awk '{print $4}')
+			sec_arg=$(dig $SUB.$DOMAIN | grep -A1 'ANSWER SECTION:' | awk '{print $5}')
+			echo The subdomain "$SUB" is a $first_arg record and points to $sec_arg
+		else
+			for words in ${subdomains[@]}
+			do
+				first_arg=$(dig $words.$DOMAIN | grep -A1 'ANSWER SECTION:' | awk '{print $4}')
+				sec_arg=$(dig $words.$DOMAIN | grep -A1 'ANSWER SECTION:' | awk '{print $5}')
+				echo The subdomain "$words" is a $first_arg record and points to $sec_arg
+			done
+	fi
+}
+display_info $1 $2
